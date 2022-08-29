@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>
+
+    <style>
+      body,
+      #renderCanvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="renderCanvas"></canvas>
+
+    <script>
+      // let engine;
+      let sceneToRender;
+
+      const canvas = document.getElementById("renderCanvas");
+      const engine = new BABYLON.Engine(canvas, true, {});
+
+      const createScene = async () => {
+        const scene = new BABYLON.Scene(engine);
+
+        // scene.clearColor = new BABYLON.Color3.Black();
+
+        const box = BABYLON.MeshBuilder.CreateBox("box", {});
+        box.position.x = 2;
+        box.position.y = 1;
+
+        const fish = BABYLON.SceneLoader.ImportMesh(
+          "",
+          "./assets/",
+          "clownFish.glb",
+          scene,
+          function (newMeshes) {
+            newMeshes[0].scaling = new BABYLON.Vector3(1, 1, 1);
+          }
+        );
+
+        // UniversalCamera
+        const camera1 = new BABYLON.FreeCamera(
+          "freeCamera",
+          new BABYLON.Vector3(0, 0, -10),
+          scene
+        );
+
+        camera1.attachControl(canvas, true);
+        // camera.attachControl(canvas, true);
+
+        const light = new BABYLON.HemisphericLight(
+          "light",
+          new BABYLON.Vector3(1, 1, 0)
+        );
+
+        const layer = new BABYLON.Layer("layer", null, scene, true);
+        BABYLON.VideoTexture.CreateFromWebCam(
+          scene,
+          (videoTexture) => {
+            videoTexture.vScale = -1.0;
+            videoTexture.uScale =
+              ((canvas.width / canvas.height) * videoTexture.getSize().height) /
+              videoTexture.getSize().width;
+            layer.texture = videoTexture;
+          },
+          {
+            maxWidth: canvas.width,
+            maxHeight: canvas.height,
+            facingMode: "environment",
+          }
+        );
+
+        // Initialize XR experience with default experience helper.
+        const xrHelper = await scene.createDefaultXRExperienceAsync({
+          uiOptions: {
+            sessionMode: "immersive-ar",
+            referenceSpaceType: "local-floor",
+          },
+          optionalFeatures: true,
+        });
+        if (!xrHelper.baseExperience) {
+          // XR support is unavailable.
+          console.log("WebXR support is unavailable");
+        } else {
+          return scene;
+        }
+      };
+
+      scene = createScene();
+      console.log(scene);
+      scene.then(function (returnedScene) {
+        sceneToRender = returnedScene;
+      });
+
+      // Run render loop to render future frames.
+      engine.runRenderLoop(function () {
+        if (sceneToRender) {
+          sceneToRender.render();
+        }
+      });
+
+      // Handle browser resize.
+      window.addEventListener("resize", function () {
+        engine.resize();
+      });
+    </script>
+  </body>
+</html>
