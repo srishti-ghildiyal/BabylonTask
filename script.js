@@ -47,22 +47,6 @@ const createScene = async function () {
   );
 
   const videoLayer = new BABYLON.Layer("videoLayer", null, scene, true);
-  const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
-    scene,
-    (videoTexture) => {
-      videoTexture._invertY = false;
-      videoTexture;
-      videoLayer.texture = videoTexture;
-    },
-    {
-      minWidth: 640,
-      minHeight: 480,
-      maxWidth: 1920,
-      maxHeight: 1080,
-      deviceId: "",
-      facingMode: "environment",
-    }
-  );
 
   // model
   const fish = BABYLON.SceneLoader.ImportMesh(
