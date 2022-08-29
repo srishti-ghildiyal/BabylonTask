@@ -23,29 +23,14 @@
         const scene = new BABYLON.Scene(engine);
         scene.clearColor = new BABYLON.Color3.Black();
 
-        // const alpha = -Math.PI / 4;
-        // const beta = Math.PI / 3;
-        // const radius = 6;
-        // const target = new BABYLON.Vector3(0, 0, 0);
-
-        // const camera = new BABYLON.ArcRotateCamera(
-        //   "Camera",
-        //   alpha,
-        //   beta,
-        //   radius,
-        //   target,
-        //   scene
-        // );
         var camera = new BABYLON.DeviceOrientationCamera(
           "DevOr_camera",
           new BABYLON.Vector3(0, 0, -10),
           scene
         );
 
-        // Targets the camera to a particular position
         camera.setTarget(new BABYLON.Vector3(0, 0, 0));
 
-        // Sets the sensitivity of the camera to movement and rotation
         camera.angularSensibility = 1;
         camera.moveSensibility = 1;
 
@@ -64,7 +49,7 @@
         const videoTexture = BABYLON.VideoTexture.CreateFromWebCam(
           scene,
           (videoTexture) => {
-            videoTexture._invertY = false;
+            videoTexture._invertY = true;
             videoTexture;
             videoLayer.texture = videoTexture;
           },
@@ -76,22 +61,6 @@
             deviceId: "",
           }
         );
-
-        // BABYLON.VideoTexture.CreateFromWebCam(
-        //   scene,
-        //   function (videoTexture) {
-        //     videoTexture.vScale = -1.0;
-        //     videoTexture.uScale =
-        //       ((canvas.width / canvas.height) * videoTexture.getSize().height) /
-        //       videoTexture.getSize().width;
-        //     layer.texture = videoTexture;
-        //   },
-        //   {
-        //     maxWidth: canvas.width,
-        //     maxHeight: canvas.height,
-        //     facingMode: "environment",
-        //   }
-        // );
 
         const fish = BABYLON.SceneLoader.ImportMesh(
           "",
@@ -128,12 +97,6 @@
         });
         advancedTexture.addControl(button1);
         advancedTexture.addControl(button2);
-
-        // const xr = await scene.createDefaultXRExperienceAsync({
-        //   uiOptions: {
-        //     sessionMode: "immersive-ar",
-        //   },
-        // });
 
         return scene;
       };
