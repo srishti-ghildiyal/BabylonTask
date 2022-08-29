@@ -26,11 +26,11 @@
         //camera-1
         var camera = new BABYLON.DeviceOrientationCamera(
           "DevOr_camera",
-          new BABYLON.Vector3(0, 0, -10),
+          new BABYLON.Vector3.Zero(),
           scene
         );
 
-        camera.setTarget(new BABYLON.Vector3(0, 0, 0));
+        // camera.setTarget(new BABYLON.Vector3(0, 0, 0));
 
         camera.angularSensibility = 1;
         camera.moveSensibility = 1;
