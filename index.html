@@ -21,7 +21,6 @@
 
       const createScene = async function () {
         const scene = new BABYLON.Scene(engine);
-        // scene.clearColor = new BABYLON.Color3.Black();
 
         //camera-1
         var camera = new BABYLON.DeviceOrientationCamera(
@@ -90,7 +89,6 @@
           scene,
           function (meshes) {
             meshes[0].scaling = new BABYLON.Vector3(5, 5, 5);
-            // meshes[0].setAbsolutePosition(BABYLON.Vector3(0, 0, 0));
           }
         );
 
@@ -98,7 +96,7 @@
           BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
         var button1 = BABYLON.GUI.Button.CreateSimpleButton("but1", "View1");
-        button1.top = "320px";
+        button1.top = "170px";
         button1.width = 0.4;
         button1.height = 0.1;
         button1.color = "white";
@@ -109,7 +107,7 @@
           scene.activeCameras.push(camera2);
         });
         var button2 = BABYLON.GUI.Button.CreateSimpleButton("but1", "View2");
-        button2.top = "170px";
+        button2.top = "320px";
         button2.width = 0.4;
         button2.height = 0.1;
         button2.color = "white";
@@ -118,6 +116,7 @@
         button2.onPointerUpObservable.add(function () {
           scene.activeCameras.push(camera);
         });
+
         advancedTexture.addControl(button1);
         advancedTexture.addControl(button2);
 
