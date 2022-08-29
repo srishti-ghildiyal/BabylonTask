@@ -40,6 +40,24 @@
         camera.lowerRadiusLimit = 4;
         camera.upperRadiusLimit = 9;
 
+        const alpha = -Math.PI / 4;
+        const beta = Math.PI / 3;
+        const radius = 6;
+        const target = new BABYLON.Vector3(0, 0, 0);
+
+        const camera2 = new BABYLON.ArcRotateCamera(
+          "Camera",
+          alpha,
+          beta,
+          radius,
+          target,
+          scene
+        );
+
+        camera2.attachControl(canvas, true);
+        camera2.lowerRadiusLimit = 4;
+        camera2.upperRadiusLimit = 9;
+
         const light = new BABYLON.HemisphericLight(
           "light",
           new BABYLON.Vector3(1, 1, 0)
@@ -70,7 +88,7 @@
           scene,
           function (meshes) {
             meshes[0].scaling = new BABYLON.Vector3(6, 6, 6);
-            meshes[0].setAbsolutePosition(BABYLON.Vector3(0, 0, 0));
+            // meshes[0].setAbsolutePosition(BABYLON.Vector3(0, 0, 0));
           }
         );
 
@@ -86,23 +104,7 @@
         button1.background = "green";
         button1.onPointerUpObservable.add(function () {
           // alert("you did it!");
-          const alpha = -Math.PI / 4;
-          const beta = Math.PI / 3;
-          const radius = 6;
-          const target = new BABYLON.Vector3(0, 0, 0);
-
-          const camera = new BABYLON.ArcRotateCamera(
-            "Camera",
-            alpha,
-            beta,
-            radius,
-            target,
-            scene
-          );
-
-          camera.attachControl(canvas, true);
-          camera.lowerRadiusLimit = 4;
-          camera.upperRadiusLimit = 9;
+          scene.activeCameras.push(camera2);
         });
         var button2 = BABYLON.GUI.Button.CreateSimpleButton("but1", "Click Me");
         button2.top = "230px";
