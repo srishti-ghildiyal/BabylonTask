@@ -137,10 +137,17 @@
 
         return scene;
       };
-      var scene = createScene();
-      const sceneToRender = createScene();
+      scene = createScene();
+      console.log(scene);
+      scene.then(function (returnedScene) {
+        sceneToRender = returnedScene;
+      });
+
+      // Run render loop to render future frames.
       engine.runRenderLoop(function () {
-        sceneToRender.render();
+        if (sceneToRender) {
+          sceneToRender.render();
+        }
       });
     </script>
   </body>
