@@ -95,7 +95,7 @@
         var advancedTexture =
           BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-        var button1 = BABYLON.GUI.Button.CreateSimpleButton("but1", "ARC");
+        var button1 = BABYLON.GUI.Button.CreateSimpleButton("but1", "View1");
         button1.top = "320px";
         button1.width = 0.4;
         button1.height = 0.1;
@@ -106,15 +106,15 @@
           // alert("you did it!");
           scene.activeCameras.push(camera2);
         });
-        var button2 = BABYLON.GUI.Button.CreateSimpleButton("but1", "Click Me");
-        button2.top = "230px";
+        var button2 = BABYLON.GUI.Button.CreateSimpleButton("but1", "View2");
+        button2.top = "170px";
         button2.width = 0.4;
         button2.height = 0.1;
         button2.color = "white";
         button2.fontSize = 50;
         button2.background = "green";
         button2.onPointerUpObservable.add(function () {
-          alert("you did it!");
+          scene.activeCameras.push(camera);
         });
         advancedTexture.addControl(button1);
         advancedTexture.addControl(button2);
