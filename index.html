@@ -108,10 +108,23 @@
         button1.color = "white";
         button1.fontSize = 50;
         button1.background = "green";
+        // button1.onPointerUpObservable.add(function () {
+        //   // alert("you did it!");
+        //   scene.activeCameras.push(camera2);
+        // });
+
         button1.onPointerUpObservable.add(function () {
-          // alert("you did it!");
-          scene.activeCameras.push(camera2);
+          if (typeof DeviceMotionEvent.requestPermission === "function") {
+            DeviceMotionEvent.requestPermission()
+              .then((permissionState) => {
+                if (permissionState === "granted") {
+                  scene.activeCameras.push(camera2);
+                }
+              })
+              .catch(console.error);
+          }
         });
+
         var button2 = BABYLON.GUI.Button.CreateSimpleButton("but1", "View2");
         button2.top = "320px";
         button2.width = 0.4;
@@ -120,7 +133,15 @@
         button2.fontSize = 50;
         button2.background = "green";
         button2.onPointerUpObservable.add(function () {
-          scene.activeCameras.push(camera);
+          if (typeof DeviceMotionEvent.requestPermission === "function") {
+            DeviceMotionEvent.requestPermission()
+              .then((permissionState) => {
+                if (permissionState === "granted") {
+                  scene.activeCameras.push(camera);
+                }
+              })
+              .catch(console.error);
+          }
         });
 
         advancedTexture.addControl(button1);
