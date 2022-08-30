@@ -113,7 +113,7 @@
         //   scene.activeCameras.push(camera2);
         // });
 
-        button1.onPointerUpObservable.add(function () {
+        button1.onPointerUpObservable.add(function onClick() {
           if (typeof DeviceMotionEvent.requestPermission === "function") {
             DeviceMotionEvent.requestPermission()
               .then((permissionState) => {
@@ -132,7 +132,7 @@
         button2.color = "white";
         button2.fontSize = 50;
         button2.background = "green";
-        button2.onPointerUpObservable.add(function () {
+        button2.onPointerUpObservable.add(function onClick() {
           if (typeof DeviceMotionEvent.requestPermission === "function") {
             DeviceMotionEvent.requestPermission()
               .then((permissionState) => {
