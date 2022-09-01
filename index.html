@@ -29,22 +29,13 @@
         const scene = new BABYLON.Scene(engine);
 
         //camera-1
-        // var camera = new BABYLON.DeviceOrientationCamera(
-        //   "DevOr_camera",
-        //   new BABYLON.Vector3(0, 0, -10),
-        //   scene
-        // );
-
-        // camera.setTarget(new BABYLON.Vector3(0, 0, 0));
-
-        var camera = new BABYLON.FreeCamera(
-          "camera1",
-          new BABYLON.Vector3(0, 5, -10),
+        var camera = new BABYLON.DeviceOrientationCamera(
+          "DevOr_camera",
+          new BABYLON.Vector3(0, 0, -10),
           scene
         );
 
-        // Targeting the camera to scene origin
-        camera.setTarget(new BABYLON.Vector3.Zero());
+        camera.setTarget(new BABYLON.Vector3(0, 0, 0));
 
         camera.angularSensibility = 1;
         camera.moveSensibility = 1;
